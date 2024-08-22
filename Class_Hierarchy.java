@@ -1,11 +1,13 @@
 //Override of toString is in Teacher class.
 //Override of hashCode is in HighschoolStudent class.
 //Override of equals is in Person class.
+//Static block is in Worker class.
 abstract class Person{
     private int id;
     String name;
     int age;
-
+    static int year=2024;
+    
     public Person(int id,String name, int age){
         this.id=id;
         this.name=name;
@@ -18,6 +20,10 @@ abstract class Person{
     
     public void setId(int id){
         this.id=id;
+    }
+
+    static void printYear(){
+        System.out.println("The year is "+year);
     }
     
 
@@ -34,7 +40,26 @@ abstract class Person{
     }
 }
 
-    
+interface wakeUp{
+    public void wakeUpTime();
+}
+
+interface sleep{
+    public void sleepTime();
+}
+
+interface play{
+    public void playTime();
+}
+
+interface eat{
+    public void eatingTime();
+}
+
+interface dream{
+    public void dreamTime();
+}
+
 
 class Student extends Person{
     String grade;
@@ -50,7 +75,7 @@ class Student extends Person{
     
 }
 
-    class HighschoolStudent extends Student{
+    class HighschoolStudent extends Student implements wakeUp{
         protected boolean privateSchool;
         public HighschoolStudent(int id,String name,int age,String grade,boolean privateSchool){
             super(id, name, age, grade);
@@ -62,13 +87,21 @@ class Student extends Person{
             int code=this.getId() + this.age;
             return code;
         }
+    @Override
+        public void wakeUpTime(){
+            System.out.println("This Highschool Student wakes up at 09:00 AM");
+        }
     }
 
-    class ElementaryStudent extends Student{
+    class ElementaryStudent extends Student implements play{
         protected String favColor;
         public ElementaryStudent(int id,String name,int age, String grade,String favColor){
             super(id, name, age, grade);
             this.favColor=favColor;
+        }
+        @Override
+        public void playTime() {
+            System.out.println("This Elementary Student plays with toys");
         }
     }
 
@@ -97,11 +130,17 @@ class Worker extends Person{
     @Override
     public void printName(){
         System.out.println("The Worker's name is "+ this.name);
+    }   
+    static {
+        System.out.println("All workers must pay taxes before the end of the month.");
+    }
+    final void payTaxes(){
+        System.out.println("You have paid your taxes");
     }
 
 }
 
-    class Teacher extends Worker{
+    class Teacher extends Worker implements sleep{
         String field;
         public Teacher(int id,String name, int age,String cardNumber,String field){
             super(id,name,age,cardNumber);
@@ -109,7 +148,11 @@ class Worker extends Person{
         }
         @Override
         public String toString(){
-            return "This theacher's name is "+name+ ", and their field is "+field+".";
+            return "This teacher's name is "+name+ ", and their field is "+field+".";
+        }
+        @Override
+        public void sleepTime() {
+            System.out.println("This teacher sleeps at 01:00 AM");
         }
     }
 
@@ -156,17 +199,22 @@ class Worker extends Person{
     
     }
 
-    class Farmer extends Worker{
+    class Farmer extends Worker implements eat{
         String farmType;
         public Farmer(int id,String name, int age,String cardNumber,String farmType){
             super(id,name,age,cardNumber);
             this.farmType=farmType;
+        }
+        @Override
+        public void eatingTime() {
+            System.out.println("This farmer eats eggs and chicken.");
         } 
     }
 
     class Lawyer extends Worker{
         protected int casesWon;
         private int casesLost;
+        final boolean inDebt=true;
         public Lawyer(int id,String name, int age,String cardNumber,int casesWon,int casesLost){
             super(id,name,age,cardNumber);
             this.casesWon=casesWon;
@@ -199,7 +247,7 @@ class Worker extends Person{
         }
     }
     
-    class Athlete extends Worker{
+    class Athlete extends Worker implements dream{
         String sport;
         protected boolean fit;
         public Athlete(int id,String name, int age,String cardNumber,String sport,boolean fit){
@@ -212,6 +260,10 @@ class Worker extends Person{
             super(id, name, age,cardNumber);
             this.sport=sport;
             this.fit=true;
+        }
+        @Override
+        public void dreamTime() {
+            System.out.println("This athlete dreams of winning a gold medal.");
         }
     }
 
@@ -226,8 +278,14 @@ class Worker extends Person{
             return plumbingLicense;
         }
 
-        public void setLicnese(boolean plumbingLicense){
+        public void setLicense(boolean plumbingLicense){
             this.plumbingLicense=plumbingLicense;
+        }
+    }
+
+    final class unemployed extends Worker{
+        public unemployed(int id,String name, int age, String cardNumber){
+            super(id,name,age,cardNumber);
         }
     }
 
@@ -247,6 +305,8 @@ public class Class_Hierarchy {
         System.out.println(teacher.toString());
         System.out.println(highschoolStudent.hashCode());
         System.out.println(farmer.equals(plumber));
+        highschoolStudent.wakeUpTime();
+        farmer.printYear();
     }
     
 }
