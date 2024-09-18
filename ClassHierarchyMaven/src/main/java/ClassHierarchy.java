@@ -4,22 +4,26 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.function.BiFunction;
+import java.lang.reflect.*;
 
 import Classes.Interfaces.CustomLambda1;
 import Classes.Interfaces.CustomLambda2;
 import Classes.Interfaces.CustomLambda3;
+import com.sun.jdi.Value;
 import org.apache.logging.log4j.LogManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ClassHierarchy {
     public static org.apache.logging.log4j.Logger logger;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
         File log4jfile =new File("C:\\Users\\Nicolás\\Desktop\\Java\\Solvd\\ClassHierarchyMaven\\src\\main\\java\\log4j2.properties");
         System.setProperty("log4j2.configurationFile",log4jfile.toURI().toString());
         logger=LogManager.getLogger(ClassHierarchy.class);
@@ -116,8 +120,76 @@ public class ClassHierarchy {
         CustomLambda3<String,Integer> thirdLambda=(name,age)->logger.info("The person's name is " +name+", and their age is "+age);
         thirdLambda.printInfo(chef.name,chef.age);
 
+        //Streams
+        List <String> nameList= new ArrayList<>();
+        nameList.add(athlete.name);
+        nameList.add(teacher.name);
+        nameList.add(banker.name);
+        nameList.add(collegeStudent.name);
+        nameList.add(lawyer.name);
+        nameList.add(chef.name);
+        nameList.add(teacher.name);
+        nameList.add(elementaryStudent.name);
+        nameList.add(highschoolStudent.name);
+        nameList.add(plumber.name);
+        nameList.add(politician.name);
+        nameList.add(unemployed.name);
+        nameList.stream().sorted()
+                .map(String::toUpperCase)
+                .filter(name-> name.contains("A"))
+                .distinct()
+                .forEach(logger::info);
 
+        long nameCount= nameList.stream().count();
+        logger.info("There are "+nameCount+" names in total");
+
+        List<String> containsA=nameList.stream()
+                .map(String::toUpperCase)
+                .filter(name->name.contains("A"))
+                .distinct()
+                .collect(Collectors.toList());
+        logger.info("There are "+containsA.size()+" names that contain 'A'");
+    //Reflection
+        Class c =Class.forName("Classes.Person");
+        Constructor[] constructors=c.getDeclaredConstructors();
+        for(Constructor constructor : constructors) {
+            logger.info("Constructor of person: "+ constructor);
+            logger.info("The Person constructor has "+ constructor.getParameterCount()+" parameters");
+        }
+        Method[] methods =c.getDeclaredMethods();
+        logger.info("The Person class has "+methods.length+" methods");
+        for(Method method: methods){
+            logger.info("Name of method: "+method);
+            logger.info("Return type of method: "+method.getReturnType());
+        }
+        List<Field> fields =Arrays.asList(c.getDeclaredFields());
+        logger.info("The Person class has "+fields.size()+" fields");
+        for(Field field:fields){
+            logger.info("Name of field, with type: "+field);
+        }
+        try{
+            Class c2 =Class.forName("Classes.Worker");
+            Constructor<?> constructor=c2.getDeclaredConstructor(int.class,String.class,int.class,String.class);
+            Object object=constructor.newInstance(99,"ReflectedPerson",99,"9999999");
+            Person reflectedPerson=(Person) object;
+            logger.info(reflectedPerson.name);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        ClassHierarchy object=new ClassHierarchy();
+        Class c3=Class.forName("ClassHierarchy");
+        Method reflectMethod=c3.getDeclaredMethod("helloThere");
+        try{
+            reflectMethod.invoke(object);
+        }catch(InvocationTargetException | IllegalAccessException e){
+            logger.warn(e.getCause());
+        }
     }
+    public void helloThere(){
+        logger.info("This method was called using reflection");
+    }
+
     static void checkTitle(boolean title) throws InvalidTitle{
         if (!title){
             throw new InvalidTitle("You cant create a college student without a high school title.");
