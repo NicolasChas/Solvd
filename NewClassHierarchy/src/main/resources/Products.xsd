@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Products">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Product" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="idProduct" type="xs:int"/>
+                            <xs:element name="Name" type="xs:string"/>
+                            <xs:element name="Price" type="xs:int"/>
+                            <xs:choice>
+                                <xs:element name="Meat" type="Meat"/>
+                                <xs:element name="Meat" type="Vegetable"/>
+                                <xs:element name="Meat" type="Fruit"/>
+                                <xs:element name="Meat" type="Dairy"/>
+                                <xs:element name="Meat" type="Bread"/>
+                            </xs:choice>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Meat">
+        <xs:sequence>
+            <xs:element name="idMeat" type="xs:int"/>
+            <xs:element name="Cut" type="xs:string"/>
+            <xs:element name="Brand" type="xs:string"/>
+            <xs:element name="idProduct" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Vegetable">
+        <xs:sequence>
+            <xs:element name="idVegetable" type="xs:int"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Brand" type="xs:string"/>
+            <xs:element name="idProduct" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Fruit">
+        <xs:sequence>
+            <xs:element name="idFruit" type="xs:int"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Brand" type="xs:string"/>
+            <xs:element name="idProduct" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Dairy">
+        <xs:sequence>
+            <xs:element name="idDairy" type="xs:int"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Brand" type="xs:string"/>
+            <xs:element name="idProduct" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Bread">
+        <xs:sequence>
+            <xs:element name="idBread" type="xs:int"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Brand" type="xs:string"/>
+            <xs:element name="idProduct" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

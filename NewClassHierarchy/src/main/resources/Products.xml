@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Products>
+    <Product>
+        <idProduct>1</idProduct>
+        <Name>Meat</Name>
+        <Price>50</Price>
+        <Meat>
+            <idMeat>1</idMeat>
+            <Cut>Milanesa</Cut>
+            <Brand>MeatStar</Brand>
+            <idProduct>1</idProduct>
+        </Meat>
+    </Product>
+
+    <Product>
+        <idProduct>3</idProduct>
+        <Name>Vegetable</Name>
+        <Price>20</Price>
+        <Vegetable>
+            <idVegetable>1</idVegetable>
+            <Name>Onion</Name>
+            <Brand>Fresher</Brand>
+            <idProduct>3</idProduct>
+        </Vegetable>
+    </Product>
+
+    <Product>
+        <idProduct>5</idProduct>
+        <Name>Fruit</Name>
+        <Price>18</Price>
+        <Fruit>
+            <idFruit>1</idFruit>
+            <Name>Tomato</Name>
+            <Brand>Fresher</Brand>
+            <idProduct>5</idProduct>
+        </Fruit>
+    </Product>
+
+    <Product>
+        <idProduct>7</idProduct>
+        <Name>Dairy</Name>
+        <Price>43</Price>
+        <Dairy>
+            <idDairy>1</idDairy>
+            <Name>Whole Milk</Name>
+            <Brand>LaSerenisima</Brand>
+            <idProduct>7</idProduct>
+        </Dairy>
+    </Product>
+
+    <Product>
+        <idProduct>9</idProduct>
+        <Name>Bread</Name>
+        <Price>11</Price>
+        <Bread>
+            <idBread>1</idBread>
+            <Name>Sliced Bread</Name>
+            <Brand>Bimbo</Brand>
+            <idProduct>9</idProduct>
+        </Bread>
+    </Product>
+</Products>
