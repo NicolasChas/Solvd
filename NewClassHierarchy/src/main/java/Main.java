@@ -16,7 +16,13 @@ public class Main {
         DataSource dataSource = ConnectionPool.getDataSource();
         GenericDAO<Product, Integer> ProductDAO = new ProductDAO(dataSource);
         ServiceLayer serviceLayer=new ServiceLayer(ProductDAO);
-
+        try{
+            String path="C:\\Users\\Nicolás\\Desktop\\Java\\Solvd\\NewClassHierarchy\\src\\main\\resources\\Products.xml";
+            XMLParser parser= new XMLParser();
+            parser.parseXML(path);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try{
             Product product=new Product(23,"Dairy",23);
             serviceLayer.addProduct(product);
