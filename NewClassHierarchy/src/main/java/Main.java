@@ -3,6 +3,7 @@ import Classes.Interfaces.GenericDAO;
 import org.apache.logging.log4j.LogManager;
 
 import javax.sql.DataSource;
+import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.sql.SQLException;
 
@@ -23,6 +24,18 @@ public class Main {
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        JAXBParser parser = new JAXBParser();
+        try {
+            Products productsXML = parser.jaxbParser("C:\\Users\\Nicolás\\Desktop\\Java\\Solvd\\NewClassHierarchy\\src\\main\\resources\\Products.xml");
+            logger.info("Product list from XML File:");
+            for (Product product : productsXML.getProducts()) {
+                logger.info(product);
+            }
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+        
         try{
             Product product=new Product(23,"Dairy",23);
             serviceLayer.addProduct(product);
