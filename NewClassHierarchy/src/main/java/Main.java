@@ -5,7 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import javax.sql.DataSource;
 import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.sql.SQLException;
 
 public class Main {
     public static org.apache.logging.log4j.Logger logger;
@@ -24,28 +23,37 @@ public class Main {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
+
         JAXBParser parser = new JAXBParser();
         try {
             Products productsXML = parser.jaxbParser("C:\\Users\\Nicolás\\Desktop\\Java\\Solvd\\NewClassHierarchy\\src\\main\\resources\\Products.xml");
-            logger.info("Product list from XML File:");
+            logger.info("\nProduct list from XML File:");
             for (Product product : productsXML.getProducts()) {
                 logger.info(product);
             }
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }
-        
-        try{
-            Product product=new Product(23,"Dairy",23);
-            serviceLayer.addProduct(product);
 
-            Product retrievedProduct = serviceLayer.getProductById(23);
-            if (retrievedProduct != null) {
-                logger.info("Product: "+retrievedProduct.getName()+" Price: "+retrievedProduct.getPrice());
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
+        JsonParser jsonParser = new JsonParser();
+        Products jsonProducts = jsonParser.parse("C:\\Users\\Nicolás\\Desktop\\Java\\Solvd\\NewClassHierarchy\\src\\main\\resources\\Products.json");
+
+        if (jsonProducts != null) {
+            logger.info("\nProduct List from Json File:"+jsonProducts);
+//            logger.info(jsonProducts);
+        } else {
+            logger.error("An error occurred when Parsing the Json File.");
         }
+//        try{
+//            Product product=new Product(23,"Dairy",23);
+//            serviceLayer.addProduct(product);
+//
+//            Product retrievedProduct = serviceLayer.getProductById(23);
+//            if (retrievedProduct != null) {
+//                logger.info("Product: "+retrievedProduct.getName()+" Price: "+retrievedProduct.getPrice());
+//            }
+//        }catch(SQLException e){
+//            e.printStackTrace();
+//        }
     }
 }

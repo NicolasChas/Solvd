@@ -1,12 +1,17 @@
 package Classes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Meat")
 public class Meat extends Product{
+    @JsonProperty("idMeat")
     private int idMeat;
+    @JsonProperty("Cut")
     private String cut;
+    @JsonProperty("Brand")
     private String brand;
 
     public Meat() {}

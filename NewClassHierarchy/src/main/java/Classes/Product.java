@@ -1,14 +1,26 @@
 package Classes;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Meat.class, name = "Meat"),
+        @JsonSubTypes.Type(value = Vegetables.class, name = "Vegetables")
+})
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 @XmlType(propOrder = { "idProduct", "name", "price" })
 @XmlSeeAlso({Meat.class, Vegetables.class})
 public class Product {
+    @JsonProperty("idProduct")
     private int idProduct;
+    @JsonProperty("Name")
     private String name;
+    @JsonProperty("Price")
     private int price;
 
     public Product(){}

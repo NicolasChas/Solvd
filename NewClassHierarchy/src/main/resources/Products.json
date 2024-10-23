@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "idProduct": "1",
+      "Name": "Meat",
+      "Price": "50",
+      "idMeat": "1",
+      "Cut": "Milanesa",
+      "Brand": "MeatStar"
+    },
+    {
+      "idProduct": "3",
+      "Name": "Vegetable",
+      "Price": "20",
+      "idVegetable": "1",
+      "vegName": "Onion",
+      "Brand": "Fresher"
+    },
+    {
+      "idProduct": "5",
+      "Name": "Fruit",
+      "Price": "18",
+      "idFruit": "1",
+      "fruitName": "Tomato",
+      "Brand": "Fresher"
+    },
+    {
+      "idProduct": "7",
+      "Name": "Dairy",
+      "Price": "43",
+      "idDairy": "1",
+      "dairyName": "Whole Milk",
+      "Brand": "LaSerenisima"
+    },
+    {
+      "idProduct": "9",
+      "Name": "Bread",
+      "Price": "11",
+      "idBread": "1",
+      "breadName": "Sliced Bread",
+      "Brand": "Bimbo"
+    }
+  ]
+}

@@ -37,7 +37,6 @@ public abstract class AbstractDAO<T,U> implements GenericDAO<T,U> {
 @Override
 public void insert(T entity) {
     Map<String, String> fieldColumnMapping = getFieldColumnMapping();
-
     // Build the SQL query dynamically
     StringBuilder sql = new StringBuilder("INSERT INTO ");
     sql.append(getTableName()).append(" (");
